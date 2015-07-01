@@ -4,8 +4,10 @@ maintainer_email 'dennis.hoer@gmail.com'
 license 'MIT'
 description 'Installs/Configures Appium'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '0.1.0'
+version '0.2.0'
 
-supports 'mac_os_x'
+supports 'centos'
+supports 'rhel'
+supports 'ubuntu'
 
-depends 'nodejs'
+depends 'nodejs', '~> 2.4'

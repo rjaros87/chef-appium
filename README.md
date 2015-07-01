@@ -1,4 +1,4 @@
-# appium Cookbook
+# Appium Cookbook
 
 [![Cookbook Version](http://img.shields.io/cookbook/v/appium.svg?style=flat-square)][supermarket]
 [![Build Status](http://img.shields.io/travis/dhoer/chef-appium.svg?style=flat-square)][travis]
@@ -8,25 +8,42 @@
 [travis]: https://travis-ci.org/dhoer/chef-appium
 [github]: https://github.com/dhoer/chef-appium/issues
 
-This cookbook installs Appium via Node.js (http://appium.io/).
+This cookbook installs Appium (http://appium.io/).
 
 ## Requirements
 
 - Chef 11 or higher
-- Java installed
-- XCode installed
+- XCode 4.5 or higher w/ Command Line Tools
 
 ### Platforms
 
+- CentOS, RedHat
 - Mac OS X
+- Ubuntu
 
 ### Cookbooks
 
-- nodejs
+- nodejs 
 
 ## Usage
 
-Include appium in runlist.
+Add the cookbook to your run_list in a node or role:
+
+```ruby
+"run_list": [
+  "recipe[appium::default]"
+]
+```
+
+or include it in a recipe:
+
+```ruby
+depends 'appium'
+```
+
+```ruby
+include_recipe 'appium::default'
+```
 
 ## Getting Help
 

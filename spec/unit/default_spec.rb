@@ -1,39 +1,44 @@
 require 'spec_helper'
 
 describe 'appium::default' do
-  context 'mac_os_x' do
+  context 'debian' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10') do |node|
-        node.set['appium']['user'] = Etc.getlogin
-      end.converge(described_recipe)
+      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04').converge(described_recipe)
     end
 
-    it 'installs package' do
+    it 'installs appium' do
       expect(chef_run).to install_nodejs_npm('appium')
     end
+  end
 
-    it 'links node exec to local' do
-      expect(chef_run).to create_link('/usr/bin/node')
+  context 'mac_os_x' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10').converge(described_recipe)
     end
 
-    it 'authorizes ios' do
-      expect(chef_run).to run_execute('appium authorize ios')
+    it 'installs appium' do
+      expect(chef_run).to install_nodejs_npm('appium')
+    end
+  end
+
+  context 'rhel' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'centos', version: '7.0').converge(described_recipe)
     end
 
-    it 'creates user directory' do
-      expect(chef_run).to create_directory(%r{/Users/.*/Library/LaunchAgents})
+    it 'installs appium' do
+      expect(chef_run).to install_nodejs_npm('appium')
+    end
+  end
+
+  context 'windows' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'windows', version: '2012R2').converge(described_recipe)
     end
 
-    it 'unloads appium' do
-      expect(chef_run).to_not run_execute('unload appium')
-    end
-
-    it 'loads appium' do
-      expect(chef_run).to_not run_execute('load appium')
-    end
-
-    it 'creates launchd' do
-      expect(chef_run).to create_template('setup appium launchd')
+    it 'logs warning' do
+      expect(chef_run).to write_log('Appium cannot be installed on this platform using this cookbook.')
+        .with(level: :warn)
     end
   end
 end

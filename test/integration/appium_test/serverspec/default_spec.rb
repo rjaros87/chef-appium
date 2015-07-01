@@ -1,13 +1,17 @@
 require 'serverspec_helper'
 
-describe 'appium_test::default' do
-  if os[:family] == 'darwin'
-    describe file('/usr/local/bin/appium') do
-      it { should be_file }
-    end
+describe 'appium::default' do
+  describe file('/usr/bin/appium') do
+    it { should be_file }
+  end
 
-    describe port(4723) do
-      it { should be_listening }
-    end
+  describe command('which appium') do
+    its(:stdout) { should match(%r{/bin/appium}) }
+    its(:exit_status) { should eq 0 }
+  end
+
+  describe command('appium -v') do
+    its(:stdout) { should match(/\d*\.\d*\.\d*/) }
+    its(:exit_status) { should eq 0 }
   end
 end
