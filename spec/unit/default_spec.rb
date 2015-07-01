@@ -11,15 +11,15 @@ describe 'appium::default' do
     end
   end
 
-  context 'mac_os_x' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10').converge(described_recipe)
-    end
-
-    it 'installs appium' do
-      expect(chef_run).to install_nodejs_npm('appium')
-    end
-  end
+  # context 'mac_os_x' do
+  #   let(:chef_run) do
+  #     ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10').converge(described_recipe)
+  #   end
+  #
+  #   it 'installs appium' do
+  #     expect(chef_run).to install_nodejs_npm('appium')
+  #   end
+  # end
 
   context 'rhel' do
     let(:chef_run) do
