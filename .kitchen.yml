@@ -14,5 +14,7 @@ platforms:
 suites:
   - name: appium_test
     run_list:
-      - recipe[appium::default]
+      - recipe[appium_test::android]
     attributes:
+      java:
+        jdk_version: 7
