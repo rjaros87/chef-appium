@@ -4,6 +4,8 @@ when 'rhel', 'debian'
   include_recipe 'nodejs'
 
   nodejs_npm 'appium' do
+    path "#{node['appium']['nodejs_home']}/bin" unless node['appium']['nodejs_home'].nil?
+    options node['appium']['npm_options']
     version node['appium']['version']
     user node['appium']['user']
   end
