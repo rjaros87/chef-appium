@@ -45,6 +45,8 @@ depends 'appium'
 include_recipe 'appium::default'
 ```
 
+If you have installed nodejs in custom directory, you should customize `default['appium']['nodejs_home']` attribute to properly locate nodejs.
+
 ## Getting Help
 
 - Ask specific questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/chef-appium).
